@@ -67,81 +67,12 @@
           <span class="game-options__text"> 10 </span></label>
       </form>
       <ul class="game-list-cards">
-        <li class="game-card is-covered">
+        <li v-for="(item, index) in cards" :key="index" class="game-card"
+          :class="{'is-covered' : coveredCard.includes(item), 'is-uncovered' : uncoveredCard.includes(item)}"
+          @click="handleSelectCard(item)">
           <div class="game-card__face game-card-front">
-            <h3 class="game-card-front__name">spearow</h3>
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/21.png"
-              class="game-card-front__image" />
-          </div>
-          <div class="game-card__face game-card-back">
-            <div class="game-card-back__inner">?</div>
-          </div>
-        </li>
-        <li class="game-card is-covered">
-          <div class="game-card__face game-card-front">
-            <h3 class="game-card-front__name">wartortle</h3>
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/8.png"
-              class="game-card-front__image" />
-          </div>
-          <div class="game-card__face game-card-back">
-            <div class="game-card-back__inner">?</div>
-          </div>
-        </li>
-        <li class="game-card is-covered">
-          <div class="game-card__face game-card-front">
-            <h3 class="game-card-front__name">spearow</h3>
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/21.png"
-              class="game-card-front__image" />
-          </div>
-          <div class="game-card__face game-card-back">
-            <div class="game-card-back__inner">?</div>
-          </div>
-        </li>
-        <li class="game-card is-uncovered">
-          <div class="game-card__face game-card-front">
-            <h3 class="game-card-front__name">ponyta</h3>
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/77.png"
-              class="game-card-front__image" />
-          </div>
-          <div class="game-card__face game-card-back">
-            <div class="game-card-back__inner">?</div>
-          </div>
-        </li>
-        <li class="game-card is-uncovered">
-          <div class="game-card__face game-card-front">
-            <h3 class="game-card-front__name">wartortle</h3>
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png"
-              class="game-card-front__image" />
-          </div>
-          <div class="game-card__face game-card-back">
-            <div class="game-card-back__inner">?</div>
-          </div>
-        </li>
-        <li class="game-card is-uncovered">
-          <div class="game-card__face game-card-front">
-            <h3 class="game-card-front__name">ponyta</h3>
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/77.png"
-              class="game-card-front__image" />
-          </div>
-          <div class="game-card__face game-card-back">
-            <div class="game-card-back__inner">?</div>
-          </div>
-        </li>
-        <li class="game-card is-uncovered">
-          <div class="game-card__face game-card-front">
-            <h3 class="game-card-front__name">gastly</h3>
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/92.png"
-              class="game-card-front__image" />
-          </div>
-          <div class="game-card__face game-card-back">
-            <div class="game-card-back__inner">?</div>
-          </div>
-        </li>
-        <li class="game-card is-uncovered">
-          <div class="game-card__face game-card-front">
-            <h3 class="game-card-front__name">gastly</h3>
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/92.png"
-              class="game-card-front__image" />
+            <h3 class="game-card-front__name">{{item.name}}</h3>
+            <img :src="item.images.png.front" class="game-card-front__image" />
           </div>
           <div class="game-card__face game-card-back">
             <div class="game-card-back__inner">?</div>
@@ -155,7 +86,7 @@
     <!---->
   </div>
 
-  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/vue@3"></script>
   <script src="assets/js/main.js"></script>
 </body>
 
