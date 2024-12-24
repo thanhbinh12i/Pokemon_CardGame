@@ -66,6 +66,9 @@
           </svg>
           <span class="game-options__text"> 10 </span></label>
       </form>
+      <div class="game-data">
+        <p class="game-data__item game-data__fails">bad select number : {{gameData.badSelect}}</p>
+      </div>
       <ul class="game-list-cards">
         <li v-for="(item, index) in cards" :key="index" class="game-card"
           :class="{'is-covered' : coveredCard.includes(item), 'is-uncovered' : uncoveredCard.includes(item)}"
@@ -79,8 +82,9 @@
           </div>
         </li>
       </ul>
-      <button class="button button--game">Reset Game</button>
-      <div class="game-result game-result--win">Win</div>
+      <button class="button button--game" @click="handleResetGame">Reset Game</button>
+      <div v-if="gameResult.win" class="game-result game-result--win">Win</div>
+      <div v-if="gameResult.lost" class="game-result game-result--lose">Lose</div>
       <!---->
     </div>
     <!---->

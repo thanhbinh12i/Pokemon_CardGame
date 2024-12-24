@@ -158,12 +158,35 @@ Vue.createApp({
                         },
                   ].sort(() => Math.random() - 0.5),
                   selectCard: [],
-                  pairedCard: []
+                  pairedCard: [],
+                  gameResult: {
+                        win: false,
+                        lose: false
+                  },
+                  gameData: {
+                        badSelect: 10
+                  }
+            }
+      },
+      watch: {
+            "gameData.badSelect": function (newValue) {
+                  if (newValue <= 0) {
+                        this.gameResult = {
+                              win: false,
+                              lose: true
+                        }
+                  }
             }
       },
       computed: {
             coveredCard() {
                   let coveredCard = this.cards.filter((card) => !this.uncoveredCard.includes(card))
+                  if (coveredCard.length === 0) {
+                        this.gameResult = {
+                              win: true,
+                              lose: false,
+                        };
+                  }
                   return coveredCard
             },
             uncoveredCard() {
@@ -179,11 +202,23 @@ Vue.createApp({
                         if (card1.id === card2.id) {
                               this.pairedCard.push(card1)
                               this.pairedCard.push(card2)
+                        } else {
+                              this.gameData.badSelect = this.gameData.badSelect - 1
                         }
                         setTimeout(() => {
                               this.selectCard = [];
                         }, 800);
                   }
+            },
+            handleResetGame() {
+                  this.cards = this.cards.sort(() => Math.random() - 0.5);
+                  this.selectCard = [];
+                  this.pairedCard = [];
+                  this.gameResult = {
+                        win: false,
+                        lost: false,
+                  };
+                  this.gameData.badSelect = 10;
             }
       }
 }).mount("#app")
